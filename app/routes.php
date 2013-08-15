@@ -11,7 +11,16 @@
 |
 */
 
-Route::get('/', function()
+Route::get('/', array('as' => 'home', function()
 {
-	return View::make('hello');
+	return View::make('home.index');
+}));
+
+
+
+Route::group(array('prefix' => 'v1'), function()
+{
+	Route::resource('groups', 'V1\GroupsController');
+	Route::resource('attendances', 'V1\AttendancesController');
+	Route::resource('statuses', 'V1\StatusesController');
 });
